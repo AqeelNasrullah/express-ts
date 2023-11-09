@@ -1,28 +1,25 @@
-import express from "express";
-import http from "http";
 import dotenv from "dotenv";
-import path from "path";
+import http from "http";
+import app from "./src/app";
+import uncaughtException from "./src/utils/uncaughtException";
+import uncaughtRejection from "./src/utils/uncaughtRejection";
 
+/** ENV CONFIG **/
 dotenv.config();
 
-const app = express();
-
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Server is up & running!!!" });
-});
-
-app.get("/api", (req, res) => {
-  res.status(200).json({ message: "Server is up & running!!!" });
-});
-
-app.use("/assets", express.static(path.join(__dirname, "../public")));
-
+/** VARIABLES VALUES FROM ENV FILE **/
 const BASE_URL = process.env.BASE_URL;
 const PORT = process.env.PORT;
 const NODE_ENV = process.env.NODE_ENV;
 
+/** CREATED SERVER **/
 const server = http.createServer(app);
 
+/** HANDLING UNCAUGHT EXCEPTIONS/REJECTIONS **/
+uncaughtException();
+uncaughtRejection(server);
+
+/** SERVER LISTENING TO PORT **/
 server.listen(PORT, () =>
   console.log(
     `\nServer started:\n>> [HOST]: ${BASE_URL}\n>> [MODE]: ${NODE_ENV}\n`
