@@ -1,1 +1,9 @@
-{ "rewrites": [{ "source": "/dist/(.*)", "destination": "/api" }] }
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/index.js"
+    }
+  ]
+}
