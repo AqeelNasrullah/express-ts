@@ -9,10 +9,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use("/assets", express_1.default.static(path_1.default.join(__dirname, "../public")));
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Server is up & running!!!" });
+});
 app.get("/api", (req, res) => {
     res.status(200).json({ message: "Server is up & running!!!" });
 });
+app.use("/assets", express_1.default.static(path_1.default.join(__dirname, "../public")));
 const BASE_URL = process.env.BASE_URL;
 const PORT = process.env.PORT;
 const NODE_ENV = process.env.NODE_ENV;

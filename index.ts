@@ -7,11 +7,15 @@ dotenv.config();
 
 const app = express();
 
-app.use("/assets", express.static(path.join(__dirname, "../public")));
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is up & running!!!" });
+});
 
 app.get("/api", (req, res) => {
   res.status(200).json({ message: "Server is up & running!!!" });
 });
+
+app.use("/assets", express.static(path.join(__dirname, "../public")));
 
 const BASE_URL = process.env.BASE_URL;
 const PORT = process.env.PORT;
