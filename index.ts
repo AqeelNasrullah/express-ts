@@ -10,7 +10,7 @@ dotenv.config();
 /** VARIABLES VALUES FROM ENV FILE **/
 const BASE_URL = process.env.BASE_URL;
 const PORT = process.env.PORT;
-const NODE_ENV = process.env.NODE_ENV;
+const NODE_ENV = process.env.NODE_ENV || "Development";
 
 /** CREATED SERVER **/
 const server = http.createServer(app);
